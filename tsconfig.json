@@ -23,5 +23,5 @@
     "tsBuildInfoFile": "./.cache/tsconfig.tsbuildinfo",
     "useDefineForClassFields": true,
   },
-  "include": ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx", "**/*.json"]
+  "include": ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx", "**/*.json", "eslint.config.mjs"]
 }

@@ -9,7 +9,8 @@
     "package": "electron-forge package",
     "make": "electron-forge make",
     "publish": "electron-forge publish",
-    "lint": "echo \"No linting configured\""
+    "lint": "eslint ./src",
+    "lint-fix": "eslint --fix ./src"
   },
   "keywords": [],
   "author": {
@@ -18,18 +19,27 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@electron-forge/cli": "^6.3.0",
-    "@electron-forge/maker-deb": "^6.3.0",
-    "@electron-forge/maker-rpm": "^6.3.0",
-    "@electron-forge/maker-squirrel": "^6.3.0",
-    "@electron-forge/maker-zip": "^6.3.0",
-    "@electron-forge/plugin-auto-unpack-natives": "^6.3.0",
-    "@electron-forge/plugin-vite": "^6.3.0",
+    "@electron-forge/cli": "^6.4.2",
+    "@electron-forge/maker-deb": "^6.4.2",
+    "@electron-forge/maker-rpm": "^6.4.2",
+    "@electron-forge/maker-squirrel": "^6.4.2",
+    "@electron-forge/maker-zip": "^6.4.2",
+    "@electron-forge/plugin-auto-unpack-natives": "^6.4.2",
+    "@electron-forge/plugin-vite": "^6.4.2",
+    "@eslint/js": "^9.5.0",
     "@tailwindcss/typography": "^0.5.9",
-    "autoprefixer": "^10.4.15",
+    "@typescript-eslint/parser": "^5.0.1",
+    "autoprefixer": "^10.4.19",
     "electron": "26.0.0",
-    "postcss": "^8.4.28",
-    "tailwindcss": "^3.3.3"
+    "eslint": "^8.52.0",
+    "eslint-plugin-react": "^7.34.3",
+    "globals": "^15.6.0",
+    "postcss": "^8.4.38",
+    "prettier": "^3.1.0",
+    "prettier-eslint": "^16.1.2",
+    "tailwindcss": "^3.3.3",
+    "typescript": "^5.5.2",
+    "typescript-eslint": "^7.14.1"
   },
   "dependencies": {
     "electron-squirrel-startup": "^1.0.0",
@@ -38,6 +48,6 @@
     "remark-gfm": "^3.0.1",
     "remark-parse": "^10.0.2",
     "remark-rehype": "^10.1.0",
-    "unified": "^11.0.1"
+    "unified": "^11.0.5"
   }
 }
