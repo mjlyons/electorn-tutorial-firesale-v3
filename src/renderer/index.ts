@@ -8,6 +8,11 @@ const checkForUnsavedChanges = async () => {
   Elements.SaveMarkdownButton.disabled = !hasUnsavedChanges;
 };
 
+const setHasFile = async (hasFile: boolean) => {
+  Elements.ShowFileButton.disabled = !hasFile;
+  Elements.OpenInDefaultApplicationButton.disabled = !hasFile;
+};
+
 Elements.MarkdownView.addEventListener("input", async () => {
   checkForUnsavedChanges();
 });
@@ -18,6 +23,7 @@ Elements.OpenFileButton.addEventListener("click", async () => {
 
 window.api.onFileOpen(() => {
   checkForUnsavedChanges();
+  setHasFile(true);
 });
 
 Elements.ExportHtmlButton.addEventListener("click", async () => {
@@ -29,5 +35,14 @@ Elements.ExportHtmlButton.addEventListener("click", async () => {
 Elements.SaveMarkdownButton.addEventListener("click", async () => {
   const markdown = Elements.MarkdownView.value;
   window.api.saveFile(markdown);
+  setHasFile(true);
 });
 Elements.SaveMarkdownButton.disabled = false;
+
+Elements.ShowFileButton.addEventListener("click", async () => {
+  window.api.showInFolder();
+});
+
+Elements.OpenInDefaultApplicationButton.addEventListener("click", async () => {
+  window.api.openInDefaultApp();
+});

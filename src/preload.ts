@@ -27,4 +27,10 @@ contextBridge.exposeInMainWorld("api", {
     console.log({ result });
     return result;
   },
+  showInFolder: async () => {
+    ipcRenderer.send("show-in-folder");
+  },
+  openInDefaultApp: async () => {
+    ipcRenderer.send("open-in-default-app");
+  },
 });

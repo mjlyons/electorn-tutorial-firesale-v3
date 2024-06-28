@@ -11,5 +11,7 @@ declare interface Window {
     exportFile: (htmlContent: string) => void;
     saveFile: (content: string) => void;
     checkForUnsavedChanges: (content: string) => Promise<boolean>;
+    showInFolder: () => void;
+    openInDefaultApp: () => void;
   };
 }

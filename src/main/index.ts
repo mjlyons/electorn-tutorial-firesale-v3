@@ -1,4 +1,12 @@
-import { app, BrowserWindow, dialog, ipcMain } from "electron";
+import {
+  app,
+  BrowserWindow,
+  dialog,
+  ipcMain,
+  Menu,
+  MenuItemConstructorOptions,
+  shell,
+} from "electron";
 import { readFile, writeFile } from "fs/promises";
 import { basename, join } from "path";
 
@@ -56,6 +64,8 @@ const createWindow = () => {
   mainWindow.webContents.openDevTools({
     mode: "detach",
   });
+
+  return mainWindow;
 };
 
 app.on("ready", createWindow);
@@ -149,3 +159,44 @@ ipcMain.handle("has-changes", async (event, content: string): Promise<boolean> =
   browserWindow?.setDocumentEdited(changed);
   return changed;
 });
+
+ipcMain.on("show-in-folder", async () => {
+  if (currentFile.filePath) {
+    await shell.showItemInFolder(currentFile.filePath);
+  }
+});
+
+ipcMain.on("open-in-default-app", async () => {
+  if (currentFile.filePath) {
+    await shell.openPath(currentFile.filePath);
+  }
+});
+
+const template: MenuItemConstructorOptions[] = [
+  {
+    label: "File",
+    submenu: [
+      {
+        label: "Open",
+        click: async () => {
+          let browserWindow = BrowserWindow.getFocusedWindow();
+          if (!browserWindow) browserWindow = createWindow();
+          showOpenDialog(browserWindow);
+        },
+        accelerator: "CmdOrCtrl+O",
+      },
+      { role: "close" },
+    ],
+  },
+  {
+    role: "editMenu",
+  },
+  {
+    role: "windowMenu",
+  },
+];
+if (process.platform === "darwin") {
+  template.unshift({ role: "appMenu" });
+}
+const menu = Menu.buildFromTemplate(template);
+Menu.setApplicationMenu(menu);
